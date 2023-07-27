@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#using until loop to display the string school 10 times
+
+school="Best School"
+number=0
+
+until [ $number -ge 10 ]
+do
+    echo "$school"
+    number=$(( number+1 ))
+done
