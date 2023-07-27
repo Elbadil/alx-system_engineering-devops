@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#using for loop to print the string school 10 times
 
 school="Best School"
 
