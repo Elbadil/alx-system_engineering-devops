@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#using while loop to display the string school 10 times
+#display Hi in the 9th iteration
+
+school="Best School"
+hi="Hi"
+number=1
+
+while [ $number -le 10 ]
+do
+    if [ $number = 9 ]
+    then
+        echo "$hi"
+    else
+        echo "$school"
+    fi
+    number=$(( number+1 ))
+done
