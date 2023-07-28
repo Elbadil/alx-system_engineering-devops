@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #Bash script thta displays a list of running processes
 
-ps -aux
+ps -auxH
