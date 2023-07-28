@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#Bash script that displays the PIF of the process containing the word bash
+
+ps -auxf | grep "bash" | echo "$$ bash"
