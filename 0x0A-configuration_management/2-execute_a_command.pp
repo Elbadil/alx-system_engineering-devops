@@ -2,4 +2,4 @@
 
 exec {'killmenow':
     command => '/usr/bin/pkill -f "killmenow"', # Killing process using pkill
-}   
+}
