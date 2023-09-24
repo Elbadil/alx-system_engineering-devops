@@ -1,6 +1,7 @@
 # SSH Client Configuration
-Host my-ubuntu-server
-  Hostname 100.26.170.127
-  User ubuntu
+Host *
+  SendEnv LANG LC_*
+  HashKnownHosts yes
+  GSSAPIAuthentication yes
   IdentityFile ~/.ssh/school
   PasswordAuthentication no
