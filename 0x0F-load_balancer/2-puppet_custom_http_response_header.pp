@@ -1,28 +1,29 @@
-# Update package information
+# Creating a custom HTTP header response with Puppet
+
+# First Update Package
 exec { 'apt-update':
-  command => '/usr/bin/apt-get -y update',
-  path    => ['/usr/bin', '/bin'],
+    command => '/usr/bin/apt-get -y update',
+    path    => ['/usr/bin'],
 }
 
-# Install Nginx package
+# Installing Nginx Package
 package { 'nginx':
-  ensure => installed,
+    ensure => installed,
 }
 
-# Create a basic HTML file
-file { '/var/www/html/index.html':
-  content => 'Hello World!',
+# Creating a custom HTTP header response
+file_line { 'adding custom header X-Served-By':
+    ensure   => present,
+    path     => '/etc/nginx/sites-available/default',
+    line     => '\tadd_header X-Served-By ${hostname};',
+    after    => 'server_name _;',
+    notify   => Service['nginx'], # Restart Nginx when the file is updated
+    require  => Package['nginx'],  # Ensure Nginx is installed first
 }
 
-# Configure Nginx to add the custom HTTP header
-file_line { 'add custom header':
-  ensure => present,
-  path   => '/etc/nginx/sites-available/default',
-  line   => "\tadd_header X-Served-By ${hostname};",
-  after  => 'server_name _;',
-}
-
-# Ensure Nginx is running
+# Ensuring Nginx is running
 service { 'nginx':
-  ensure => running,
+    ensure   => running,
+    enable   => true,
+    require  => Package['nginx'],
 }
