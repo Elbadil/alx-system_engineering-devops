@@ -3,7 +3,7 @@
 # First Update Package
 exec { 'apt-update':
     command => '/usr/bin/apt-get -y update',
-    path    => ['/usr/bin']
+    path    => ['/usr/bin', '/bin']
 }
 
 # Installing Nginx Package
