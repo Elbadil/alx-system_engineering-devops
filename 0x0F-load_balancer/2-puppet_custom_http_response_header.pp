@@ -11,13 +11,6 @@ package {'nginx':
     ensure => installed,
 }
 
-# Ensuring Nginx is running
-service {
-    ensure   => running,
-    enable   => true,
-    require  => Package['nginx'],
-}
-
 # Creating a custom HTTP header response
 file_line {'adding custom header X-Served-By'
     ensure   => present,
@@ -26,4 +19,11 @@ file_line {'adding custom header X-Served-By'
     after    => 'server_name _;',
     notify   => Service['nginx'], # Restart Nginx when the file is updated
     require  => Package['nginx'],  # Ensure Nginx is installed first
+}
+
+# Ensuring Nginx is running
+service {
+    ensure   => running,
+    enable   => true,
+    require  => Package['nginx'],
 }
