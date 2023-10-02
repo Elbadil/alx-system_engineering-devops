@@ -11,20 +11,19 @@ package { 'nginx':
     ensure => installed,
 }
 
-# Create a basic HTML file
-file { '/var/www/html/index.html':
-    content => 'Hello World!',
-}
-
 # Creating a custom HTTP header response
 file_line { 'adding custom header X-Served-By':
-    ensure   => present,
-    path     => '/etc/nginx/sites-available/default',
-    line     => '\tadd_header X-Served-By ${hostname};',
-    after    => 'server_name _;',
+    ensure  => present,
+    path    => '/etc/nginx/sites-available/default',
+    line    => "\tadd_header X-Served-By ${hostname};",
+    after   => 'server_name _;',
+    notify  => Service['nginx'], # Restart Nginx when the file is updated
+    require => Package['nginx'],  # Ensure Nginx is installed first
 }
 
 # Ensuring Nginx is running
 service { 'nginx':
-    ensure   => running,
+    ensure  => running,
+    enable  => true,
+    require => Package['nginx'],
 }
