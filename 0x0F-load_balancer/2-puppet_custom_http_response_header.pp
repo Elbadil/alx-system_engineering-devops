@@ -11,11 +11,16 @@ package { 'nginx':
     ensure => installed,
 }
 
+# Creating a basic HTML file
+file { '/var/www/html/index.html':
+  content => 'Hello Docker!',
+}
+
 # Creating a custom HTTP header response
 file_line { 'adding custom header X-Served-By':
     ensure   => present,
     path     => '/etc/nginx/sites-available/default',
-    line     => 'add_header X-Served-By ${hostname};',
+    line     => '\tadd_header X-Served-By ${hostname};',
     after    => 'server_name _;',
     notify   => Service['nginx'], # Restart Nginx when the file is updated
     require  => Package['nginx'],  # Ensure Nginx is installed first
