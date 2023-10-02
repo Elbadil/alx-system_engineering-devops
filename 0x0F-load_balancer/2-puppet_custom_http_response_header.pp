@@ -17,8 +17,6 @@ file_line {'adding custom header X-Served-By'
     path     => '/etc/nginx/sites-available/default',
     line     => "\tadd_header X-Served-By ${hostname};",
     after    => 'server_name _;',
-    notify   => Service['nginx'], # Restart Nginx when the file is updated
-    require  => Package['nginx'],  # Ensure Nginx is installed first
 }
 
 # Ensuring Nginx is running
