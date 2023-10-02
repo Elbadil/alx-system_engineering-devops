@@ -22,6 +22,4 @@ file_line {'adding custom header X-Served-By'
 # Ensuring Nginx is running
 service {
     ensure   => running,
-    enable   => true,
-    require  => Package['nginx'],
 }
