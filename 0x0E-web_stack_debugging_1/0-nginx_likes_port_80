@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Bash script that configures a server
+
+sudo service nginx start
