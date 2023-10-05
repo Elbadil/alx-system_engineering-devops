@@ -14,12 +14,10 @@ dns_info () {
 	echo "The subdomain $S_DOMAIN is a $R_TYPE record and points to $DEST"
 }
 
-if [ "$#" -eq 2 ]
-then
+if [ "$#" -eq 2 ];then
 	dns_info "$domain" "$subdomain"
 else
-	for subdomain in "${subdomains[@]}"
-    do
+	for subdomain in "${subdomains[@]}";do
 		dns_info "$domain" "$subdomain"
 	done
 fi
