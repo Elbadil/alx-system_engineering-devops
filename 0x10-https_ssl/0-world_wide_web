@@ -1,16 +1,25 @@
 #!/usr/bin/env bash
 # Takes 'domain' and 'subdomain' parameters and displays information for the specified subdomain
 
-print_info () {
-	script=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
-	echo "$2 $script" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
+domain=$1
+subdomain=$2
+
+subdomains=( "www" "lb-01" "web-01" "web-02")
+
+dns_info () {
+	script=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | grep -v 'ANSWER SECTION:')
+	S_DOMAIN=$(echo "$script" | awk -F "." '{print $1}')
+	R_TYPE=$(echo "$script" | awk '{print $4}')
+	DEST=$(echo "$script" | awk '{print $5}')
+	echo "The subdomain $S_DOMAIN is a $R_TYPE record and points to $DEST"
 }
 
-if [ "$#" -eq 2 ]; then
-	print_info "$1" "$2"
+if [ "$#" -eq 2 ]
+then
+	dns_info "$domain" "$subdomain"
 else
-	subdomains=("www" "lb-01" "web-01" "web-02")
-	for subdomain in "${subdomains[@]}"; do
-		print_info "$1" "$subdomain"
+	for subdomain in "${subdomains[@]}"
+    do
+		dns_info "$domain" "$subdomain"
 	done
 fi
