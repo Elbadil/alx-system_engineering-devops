@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Bash script that switches to another user's shell session using sudo and displays the name of the switched user.
+sudo -u "$1" /bin/bash -c "whoami"
