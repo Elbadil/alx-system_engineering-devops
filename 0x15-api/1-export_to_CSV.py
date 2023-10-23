@@ -28,5 +28,5 @@ if __name__ == "__main__":
         TASK_TITLE = tasks['title']
         data_to_add = [USER_ID, USERNAME, TASK_COMPLETED_STATUS, TASK_TITLE]
         with open(f'{USER_ID}.csv', mode='a', newline='') as CSVfile:
-            writer = csv.writer(CSVfile, delimiter=',')
+            writer = csv.writer(CSVfile, delimiter=',', quoting=csv.QUOTE_ALL)
             writer.writerow(data_to_add)
