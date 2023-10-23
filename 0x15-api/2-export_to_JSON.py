@@ -37,3 +37,6 @@ if __name__ == "__main__":
 
         with open(f'{USER_ID}.json', mode="w", encoding="UTF-8") as JsonFile:
             json.dump(employee_dict, JsonFile)
+
+        # Setting employee_attr to empty dict so the val to the keys can change
+        employee_attr = {}
