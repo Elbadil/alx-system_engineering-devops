@@ -24,19 +24,18 @@ if __name__ == "__main__":
     USER_ID = employee_id
     USERNAME = json_user.get('username')
     employee_dict = {}
-    employee_attr = {}
     list_attr = []
     for tasks in todos_json:
         TASK_COMPLETED_STATUS = tasks['completed']
         TASK_TITLE = tasks['title']
+
+        employee_attr = {}
         employee_attr['task'] = TASK_TITLE
         employee_attr['completed'] = TASK_COMPLETED_STATUS
         employee_attr['username'] = USERNAME
         list_attr.append(employee_attr)
-        employee_dict[USER_ID] = list_attr
 
-        with open(f'{USER_ID}.json', mode="w", encoding="UTF-8") as JsonFile:
-            json.dump(employee_dict, JsonFile)
+    employee_dict[USER_ID] = list_attr
 
-        # Setting employee_attr to empty dict so the val to the keys can change
-        employee_attr = {}
+    with open(f'{USER_ID}.json', mode="w", encoding="UTF-8") as JsonFile:
+        json.dump(employee_dict, JsonFile)
