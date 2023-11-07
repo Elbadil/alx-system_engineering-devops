@@ -22,4 +22,4 @@ def top_ten(subreddit):
             if count == 0:
                 break
     else:
-        print('None')
+        print(None)
