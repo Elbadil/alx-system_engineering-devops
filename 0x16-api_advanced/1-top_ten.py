@@ -10,16 +10,20 @@ def top_ten(subreddit):
 
     headers = {'User-Agent': 'MyAPI'}
 
-    req = requests.get(url, headers=headers, allow_redirects=False)
+    try:
+        req = requests.get(url, headers=headers, allow_redirects=False)
 
-    if req.status_code == 200:
-        hot_data = req.json()
-        hot_data_posts = hot_data['data']['children']
-        count = 10
-        for post in hot_data_posts:
-            print(post['data']['title'])
-            count -= 1
-            if count == 0:
-                break
-    else:
-        print(None)
+        if req.status_code == 200:
+            hot_data = req.json()
+            hot_data_posts = hot_data['data']['children']
+            count = 10
+            for post in hot_data_posts:
+                print(post['data']['title'])
+                count -= 1
+                if count == 0:
+                    break
+        else:
+            print('None')
+    except Exception:
+        print('None')
+
